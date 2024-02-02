@@ -1,0 +1,59 @@
+<ng-container *ngIf="this.service.accountVisible == true">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">UserID</th>
+        <th scope="col">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let user of allUsers">
+        <tr *ngIf="user.id === this.service.currenLoginUser.id">
+          <td>{{user.name}}</td>
+          <td>{{user.userName}}</td>
+          <td>{{user.email}}</td>
+          <td>
+            <button type="button" class="btn btn-secondary" (click)="editUser(user)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+<ng-container >
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Details</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #signupForm="ngForm">
+          <div class="form-outline mb-4">
+            <input type="text" id="form3Example1cg" class="form-control form-control-lg" name="name" [(ngModel)]="service.signUpObj.name" />
+            <label class="form-label" for="form3Example1cg">Your Name</label>
+          </div>
+          <div class="form-outline mb-4">
+            <input type="text" id="form3Example2cg" class="form-control form-control-lg" name="username" [(ngModel)]="service.signUpObj.userName" />
+            <label class="form-label" for="form3Example2cg">Username</label>
+          </div>
+          <div class="form-outline mb-4">
+            <input type="email" id="form3Example3cg" class="form-control form-control-lg" name="email" [(ngModel)]="service.signUpObj.email" />
+            <label class="form-label" for="form3Example3cg">Your Email</label>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="onUpdate()">Update</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+  </ng-container>
+  <button class="btn btn-danger" (click)="logout()">Logout</button>
+</ng-container>
+
